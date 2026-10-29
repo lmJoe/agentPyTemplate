@@ -1,0 +1,21 @@
+[project]
+name = "ai-fastapi-course"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "asyncpg>=0.31.0",
+    "fastapi>=0.141.1",
+    "greenlet>=3.5.6",
+    "httpx>=0.28.1",
+    "langchain>=1.4.6",
+    "langchain-community>=0.4.2",
+    "langchain-core>=1.6.12",
+    "langchain-openai>=1.7.2",
+    "pydantic-settings>=2.15.0",
+    "redis>=8.1.0",
+    "requests>=2.34.2",
+    "sqlalchemy>=2.0.54",
+    "uvicorn[standard]>=0.53.0",
+]
