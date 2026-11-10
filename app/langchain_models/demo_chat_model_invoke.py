@@ -3,7 +3,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from app.langchain_models.model_factory import LangChainModelFactory
 
 
-# 演示 LangChain ChatModel 的作用
+# 演示 LangChain ChatModel 的作用 
 def main():
   model = LangChainModelFactory.create(
     provider="deepseek",
