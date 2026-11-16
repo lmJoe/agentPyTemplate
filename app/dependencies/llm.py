@@ -1,7 +1,7 @@
 from app.core.config import settings
 from app.llm.base import BaseLLMProvider
 from app.llm.factory import LLMProviderFactory
-
+from app.langchain_models.langchain_provider import LangChainLLMProvider
 
 
 
@@ -27,7 +27,16 @@ class MockLLMProvider:
 # Factory 会根据 settings.default_model 创建：
 # DeepSeekProvider、QwenProvider 或 OpenAIProvider。
 async def get_llm_provider() -> BaseLLMProvider:
-  return LLMProviderFactory.create()
+  # 如果配置了 LangChain 模型，就使用 LangChainProvider。
+  if settings.default_llm_provider.startswith("langchain_"):
+    provider = settings.default_llm_provider.replace("langchain_","")
+    return LangChainLLMProvider(
+      provider=provider,
+      model=settings.default_model
+    )
+  return LLMProviderFactory.create(
+    provider=settings.default_llm_provider
+  )
 
 # 整条依赖链路
 # 接口请求
@@ -41,3 +50,6 @@ async def get_llm_provider() -> BaseLLMProvider:
 # 注入到接口的 llm 参数
 #     ↓
 # llm.chat(message)
+
+
+

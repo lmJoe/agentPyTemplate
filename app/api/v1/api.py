@@ -8,6 +8,12 @@ from app.api.v1.agents import router as agents_router
 from app.dependencies.auth import verfy_api_key
 
 from app.core.constants import ApiTag
+from app.api.v1.langchain_structured_outputs import (
+    router as langchain_structured_outputs_router,
+)
+
+
+
 
 # 统一聚合 v1 版本下所有 router
 # main.py 只需要注册一次： app.include_router(api_router, prefix=settings.api_v1_prefix)
@@ -26,3 +32,9 @@ api_router.include_router(conversation_router, tags=[ApiTag.CONVERSATIONS], depe
 api_router.include_router(rag_router, tags=[ApiTag.RAG], dependencies=[Depends(verfy_api_key)])
 api_router.include_router(models_router, tags=[ApiTag.MODELS])
 api_router.include_router(agents_router, tags=[ApiTag.AGENTS],dependencies=[Depends(verfy_api_key)])
+
+# 包含 LangChain 结构化输出路由
+api_router.include_router(
+    langchain_structured_outputs_router,
+    tags=["LangChain Structured Outputs"],
+)
