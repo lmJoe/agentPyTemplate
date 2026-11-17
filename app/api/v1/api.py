@@ -5,6 +5,8 @@ from app.api.v1.conversations import router as conversation_router
 from app.api.v1.rag import router as rag_router
 from app.api.v1.models import router as models_router
 from app.api.v1.agents import router as agents_router
+from app.api.v1.langchain_tools import router as langchain_tools_router
+
 from app.dependencies.auth import verfy_api_key
 
 from app.core.constants import ApiTag
@@ -37,4 +39,9 @@ api_router.include_router(agents_router, tags=[ApiTag.AGENTS],dependencies=[Depe
 api_router.include_router(
     langchain_structured_outputs_router,
     tags=["LangChain Structured Outputs"],
+)
+
+api_router.include_router(
+    langchain_tools_router,
+    tags=["LangChain Tools"],
 )
