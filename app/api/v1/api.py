@@ -6,6 +6,8 @@ from app.api.v1.rag import router as rag_router
 from app.api.v1.models import router as models_router
 from app.api.v1.agents import router as agents_router
 from app.api.v1.langchain_tools import router as langchain_tools_router
+from app.api.v1.langchain_agents import router as langchain_agents_router
+
 
 from app.dependencies.auth import verfy_api_key
 
@@ -35,6 +37,10 @@ api_router.include_router(rag_router, tags=[ApiTag.RAG], dependencies=[Depends(v
 api_router.include_router(models_router, tags=[ApiTag.MODELS])
 api_router.include_router(agents_router, tags=[ApiTag.AGENTS],dependencies=[Depends(verfy_api_key)])
 
+api_router.include_router(
+    langchain_agents_router,
+    tags=["LangChain Agents"],
+)
 # 包含 LangChain 结构化输出路由
 api_router.include_router(
     langchain_structured_outputs_router,
