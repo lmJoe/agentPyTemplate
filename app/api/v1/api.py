@@ -36,6 +36,7 @@ api_router.include_router(conversation_router, tags=[ApiTag.CONVERSATIONS], depe
 api_router.include_router(rag_router, tags=[ApiTag.RAG], dependencies=[Depends(verfy_api_key)])
 api_router.include_router(models_router, tags=[ApiTag.MODELS])
 api_router.include_router(agents_router, tags=[ApiTag.AGENTS],dependencies=[Depends(verfy_api_key)])
+from app.api.v1.langchain_rag import router as langchain_rag_router
 
 api_router.include_router(
     langchain_agents_router,
@@ -50,4 +51,9 @@ api_router.include_router(
 api_router.include_router(
     langchain_tools_router,
     tags=["LangChain Tools"],
+)
+
+api_router.include_router(
+    langchain_rag_router,
+    tags=["LangChain RAG"],
 )
