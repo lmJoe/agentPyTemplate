@@ -7,7 +7,8 @@ from app.api.v1.models import router as models_router
 from app.api.v1.agents import router as agents_router
 from app.api.v1.langchain_tools import router as langchain_tools_router
 from app.api.v1.langchain_agents import router as langchain_agents_router
-
+from app.api.v1.langchain_agent_rag import router as langchain_agent_rag_router
+from app.api.v1.langchain_rag import router as langchain_rag_router
 
 from app.dependencies.auth import verfy_api_key
 
@@ -36,7 +37,13 @@ api_router.include_router(conversation_router, tags=[ApiTag.CONVERSATIONS], depe
 api_router.include_router(rag_router, tags=[ApiTag.RAG], dependencies=[Depends(verfy_api_key)])
 api_router.include_router(models_router, tags=[ApiTag.MODELS])
 api_router.include_router(agents_router, tags=[ApiTag.AGENTS],dependencies=[Depends(verfy_api_key)])
-from app.api.v1.langchain_rag import router as langchain_rag_router
+
+
+
+api_router.include_router(
+    langchain_agent_rag_router,
+    tags=["LangChain Agent RAG"],
+)
 
 api_router.include_router(
     langchain_agents_router,
