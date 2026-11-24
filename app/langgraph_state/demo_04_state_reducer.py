@@ -10,6 +10,9 @@ from langgraph.graph import END, START, StateGraph
 # 4. answer_node 读取合并后的列表，将来源名称拼成最终回答。
 
 
+
+# merge_unique_list 定义了如何把旧的 sources 与节点返回的新 sources 合并，并去掉重复项。
+# `Annotated` 将这个合并规则绑定到 sources 字段上，因此检索节点更新该字段时，LangGraph 会调用这个 reducer。
 def merge_unique_list(
     old: list[str],
     new: list[str],
